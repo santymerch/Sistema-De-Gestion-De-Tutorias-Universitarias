@@ -1,4 +1,4 @@
-# Actividad de Exploración — Sistema de Gestión de Tutorías entre Pares, por Departamento, en Modalidad Híbrida
+# Sistema de Gestión de Tutorías Universitarias - GESTORES DE BASES DE DATOS - BUC372605B
 
 ## Integrantes:
 
