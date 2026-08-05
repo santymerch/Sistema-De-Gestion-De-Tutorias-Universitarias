@@ -27,35 +27,48 @@
 
 ### Herramienta 1: Starfish (EAB)
 
-Plataforma de éxito estudiantil que gestiona asesoría académica y agendamiento de tutorías.
+Plataforma de éxito estudiantil que gestiona asesoría académica y agendamiento de tutorías, incluyendo tutorías entre pares.
 
 **Entidades/relaciones que maneja (a nivel conceptual):**
-- Estudiante, Asesor/Tutor, Cita, Modalidad de cita (presencial/virtual).
-- Relaciona cada cita con seguimiento de riesgo académico y alertas del estudiante.
+- Estudiante, Asesor/Tutor (incluye tutor par), Cita, Modalidad de cita.
+- Para agendar, el estudiante debe tener una conexión previa con el proveedor (tutor/asesor) dentro de su "red de éxito", y el proveedor debe tener bloques de disponibilidad individual o grupal abiertos <cite index="2-1">para poder agendar, un estudiante debe tener una conexión con el proveedor en Starfish, y el proveedor debe tener bloques de citas abiertos o disponibilidad de sesión grupal que incluya estudiantes con ese tipo de conexión</cite>.
+- Contempla explícitamente el agendamiento de sesiones de **tutoría entre pares**, tanto individuales como grupales <cite index="3-1">permite programar una cita con un tutor par, de forma individual o grupal</cite>.
 
-**Lo que aporta como referencia de modelado:** representar la modalidad como atributo de la cita, y vincular el historial de citas con indicadores de seguimiento del estudiante.
-**Lo que no cubre:** no modela el rol dual estudiante/tutor ni requisitos de habilitación como tutor; su relación tutor-departamento no es un eje central del modelo.
+**Lo que aporta como referencia de modelado:** confirma que la disponibilidad debe modelarse como bloques abiertos por proveedor (tutor), y que la sesión grupal es un tipo de disponibilidad distinto a la individual — coincide con el atributo "cupo máximo" propuesto en el modelo.
+**Lo que no cubre:** no expone públicamente cómo modela los requisitos para que un estudiante se habilite como tutor par, ni la gestión independiente por departamento.
 
-### Herramienta 2: TutorTrac
+### Herramienta 2: TutorTrac (Redrock Software)
 
-Software especializado en gestión de centros de tutoría universitarios.
+Software especializado en gestión de centros de tutoría universitarios (también conocido como TracCloud).
 
 **Entidades/relaciones que maneja (a nivel conceptual):**
-- Estudiante, Tutor, Materia, Sesión, Nota de sesión, Centro/Departamento.
-- Registra visitas y notas por sesión, asociadas al estudiante y al tutor.
+- Estudiante, Tutor, Materia/Curso, Ubicación, Cita, Nota de sesión.
+- Permite <cite index="18-1">que los estudiantes reserven sesiones según la disponibilidad del tutor, la materia, el curso, la ubicación y la franja horaria</cite>, y registra el contacto con estudiantes tanto en <cite index="16-1">ubicación física como en entorno en línea</cite>.
+- Se integra con los sistemas académicos institucionales y <cite index="15-1">permite ver las clases programadas en un calendario y recuperar información de los estudiantes desde el portal institucional</cite>.
 
-**Lo que aporta como referencia de modelado:** relación materia-tutor-sesión y registro histórico de notas por sesión, base para el historial de tutoría del contexto propuesto.
-**Lo que no cubre:** no modela cupo máximo para sesiones grupales como concepto central, ni requisitos formales (nota mínima, aval) para que un estudiante se convierta en tutor.
+**Lo que aporta como referencia de modelado:** valida la relación Materia–Tutor–Ubicación–Sesión, y el registro histórico de notas por sesión como base del historial de tutoría del contexto propuesto.
+**Lo que no cubre:** no está diseñado para tutoría *entre pares* con requisitos formales de habilitación (nota mínima, aval), sino para tutores vinculados administrativamente al centro; el cupo máximo en sesiones grupales no es un concepto central de su modelo público.
 
 ### Comparación general (nivel de datos)
 
 | Entidad/Relación necesaria | Starfish | TutorTrac |
 |---|---|---|
-| Rol dual Estudiante-Tutor | No | No |
+| Rol dual Estudiante-Tutor (tutoría entre pares) | Sí (tutor par) | No documentado |
 | Departamento como entidad organizadora de tutores/materias/aulas | Parcial | Parcial |
-| Modalidad como atributo de la sesión (presencial/virtual) | Sí | Limitado |
-| Tabla puente Estudiante-Sesión para sesiones grupales con cupo | No | No |
-| Requisitos/validación para habilitar tutor | No | No |
-| Historial de sesiones y evaluación del tutor | Sí | Sí |
+| Modalidad como atributo de la sesión (presencial/virtual) | Sí | Parcial (ubicación física u online) |
+| Bloques de disponibilidad individual vs. grupal por tutor | Sí | Parcial |
+| Tabla puente Estudiante-Sesión para sesiones grupales con cupo | Implícito | No documentado |
+| Requisitos/validación para habilitar tutor | No documentado | No documentado |
+| Historial de sesiones y notas | Sí | Sí |
 
-**Conclusión de la exploración:** ninguna de las herramientas revisadas modela de forma nativa el rol dual estudiante/tutor, los requisitos de habilitación como tutor, ni el cupo máximo en sesiones grupales. Esto respalda el diseño de un modelo de datos propio que incluya: especialización de Tutor a partir de Estudiante, entidad Departamento como eje organizador, atributo de modalidad condicionando la relación con Aula o Recurso virtual, y una tabla puente Inscripción para sesiones grupales.
+**Conclusión de la exploración:** Starfish confirma el concepto de tutoría entre pares con sesiones individuales/grupales, y TutorTrac confirma la relación materia–tutor–ubicación–sesión con historial. Sin embargo, ninguna documenta públicamente los requisitos formales para habilitar a un estudiante como tutor ni una gestión explícita por departamento con reglas propias. Esto respalda el diseño de un modelo de datos propio que incluya: especialización de Tutor a partir de Estudiante, entidad Departamento como eje organizador, atributo de modalidad condicionando la relación con Aula o Recurso virtual, y una tabla puente Inscripción para sesiones grupales.
+
+## Fuentes
+
+1. Starfish (EAB) — Página oficial de la solución. https://eab.com/solutions/starfish/
+2. FAQs | Starfish Info — Penn State University. https://sites.psu.edu/starfishinfo/resources/faq/
+3. Starfish for Student Success | Students — Columbia Business School. https://students.business.columbia.edu/office-of-student-affairs/academic-advising-and-student-success/starfish-student-success
+4. TutorTrac Review: Features, Scheduling, Reporting, and Student Success Alternatives. https://www.aisaspa.com/tutortrac-review-features-scheduling-reporting-and-student-success-alternatives/
+5. TutorTrac — Smyte (ficha de producto). https://smyte.com/software/tutortrac/
+6. TutorTrac 2026 Pricing, Features, Reviews & Alternatives — GetApp. https://www.getapp.com/education-childcare-software/a/tutortrac/
+7. TutorTrac Login — Redrock Software Corporation (sitio oficial del producto). https://tracdev.go-redrock.com/
