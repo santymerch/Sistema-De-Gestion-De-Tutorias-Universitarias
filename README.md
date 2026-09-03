@@ -2,5 +2,5 @@
 
 ## Integrantes:
 
-- Carlos Santiago Merchan Centeno **01251151009**
-- Erick Santiago Rincon Rojas **01251151002**
+- Carlos Santiago Merchan Centeno 
+- Steven Roldan Aldana
