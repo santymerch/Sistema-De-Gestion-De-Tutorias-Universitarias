@@ -6,6 +6,10 @@
 - Steven Roldan Aldana
 # Actividad de Exploración — Sistema de Gestión de Tutorías entre Pares, por Departamento, en Modalidad Híbrida
 
+## Diagrama de entidad relacion
+
+![image alt]()
+
 ## 1. Conceptos importantes y relevantes en la temática
 
 - **Rol dual del estudiante**: una misma entidad *Estudiante* puede participar como tutorado en unas materias y como tutor en otras, según su desempeño académico.
