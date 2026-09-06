@@ -8,7 +8,7 @@
 
 ## Diagrama de entidad relacion
 
-![image alt]()
+![image alt](https://github.com/santymerch/Sistema-De-Gestion-De-Tutorias-Universitarias/blob/7f7514e29c3639b80754646e4e41bd427926d6b9/DIAGRAMA%20SISTEMA%20DE%20TURORIAS.drawio.png)
 
 ## 1. Conceptos importantes y relevantes en la temática
 
